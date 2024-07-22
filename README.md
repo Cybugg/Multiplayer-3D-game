@@ -12,4 +12,4 @@ yarn dev
 
 For now lets just still stick to making things work in the browser... testing and learning hhahahaha...
 
-i'll update this readme.md file subsequently.
+i'll update this readme.md file subsequently!!
