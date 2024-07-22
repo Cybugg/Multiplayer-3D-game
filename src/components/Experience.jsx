@@ -1,12 +1,16 @@
 import { OrbitControls } from "@react-three/drei";
+import { RobotModel } from "./AnimatedRobot";
+import { Suspense } from "react";
 
 export const Experience = () => {
   return (
     <>
       <OrbitControls />
       <mesh>
-        <boxGeometry />
-        <meshNormalMaterial />
+        <Suspense >
+          <RobotModel />     
+        </Suspense>
+          
       </mesh>
     </>
   );
