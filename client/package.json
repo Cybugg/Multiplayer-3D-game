@@ -1,0 +1,39 @@
+{
+  "name": "creative-portfolio-training",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "slicemachine": "start-slicemachine"
+  },
+  "dependencies": {
+    "@prismicio/client": "^7.4.0",
+    "@prismicio/next": "^1.5.0",
+    "@prismicio/react": "^2.7.4",
+    "@react-three/drei": "^9.108.4",
+    "@react-three/fiber": "^8.16.8",
+    "gltfjsx": "^6.4.1",
+    "gsap": "^3.12.5",
+    "next": "14.1.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "three": "^0.166.1",
+    "three-stdlib": "^2.30.4"
+  },
+  "devDependencies": {
+    "@slicemachine/adapter-next": "^0.3.38",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.4",
+    "postcss": "^8",
+    "slice-machine-ui": "^1.26.0",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  }
+}
