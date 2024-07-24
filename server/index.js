@@ -1,26 +1,20 @@
-import {Server} from "socket.io"
+import { createServer } from "node:http";
+import next from "next";
+import { Server } from "socket.io";
 
-const io = new Server({
-    cors:{
-        origin:'http://localhost:3000',
+const dev = process.env.NODE_ENV !== "production";
+const hostname = "localhost";
+const port = 3001;
+// when using middleware `hostname` and `port` must be provided below
+const app = next({ dev, hostname, port });
+const handler = app.getRequestHandler();
 
-    },
-})
+app.prepare().then(() => {
+  const httpServer = createServer(handler);
 
+  const io = new Server(httpServer);
 
-io.listen(3001)
-
-const characters = []; 
-
-function generateRandomPosition (){
-    return [Math.random()*3,Math.random()*3]
-};
-
-function generateRandomHexColor(){
-    return "#" + Math.floor(Math.random()*16777215).toString(16);
-};
-
-
+  
 io.on("connection",(socket)=> {
     console.log("user connected");
     characters.push({
@@ -41,3 +35,17 @@ io.on("connection",(socket)=> {
 
   
 })
+
+  httpServer
+    .once("error", (err) => {
+      console.error(err);
+      process.exit(1);
+    })
+    .listen(port, () => {
+      console.log(`> Ready on http://${hostname}:${port}`);
+    });
+});
+
+
+
+
