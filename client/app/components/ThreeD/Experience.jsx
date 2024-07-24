@@ -12,8 +12,8 @@ export const Experience = () => {
         <Environment preset="sunset" />
         <ambientLight intensity={0.3} />
           <mesh>
-            <Suspense fallback={<Html><div className="text-black">Loading ...</div></Html>}>
-                 <RobotModel />
+            <Suspense fallback={<Html><div className="text-black text-center">Loading ...</div></Html>}>
+                 {/* <RobotModel /> */}
                  <RobotModel main="brown" position-x={-5} />
             </Suspense>
          

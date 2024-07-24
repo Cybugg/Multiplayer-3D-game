@@ -34,6 +34,7 @@ export function RobotModel({
         <group name="RootNode">
           <group name="RobotArmature" rotation={[-Math.PI / 2, 0, 0]} scale={100}>
             <primitive object={nodes.Bone} />
+            <meshStandardMaterial color={main} />
           </group>
           <group
             name="HandR"
