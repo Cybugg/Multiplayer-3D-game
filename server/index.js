@@ -1,47 +1,12 @@
 import {Server} from "socket.io"
-import http from "http"
-import express from "express"
-import axios from "axios"
-import next from "next"
 
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
-const handle = app.getRequestHandler();
+const io = new Server(process.env.PORT||6060,{
+    cors:{
+        origin:'http://localhost:3001',
 
-app.prepare().then(async () => {
-    const server = express();
-    const httpServer = http.createServer(server);
-    const io = socketIO(httpServer);
-
-    io.on("connection",(socket)=> {
-        console.log("user connected");
-        characters.push({
-            id:socket.id,
-            position:generateRandomPosition(),
-            main_color:generateRandomHexColor(),
-            lining_color:generateRandomHexColor()
-        })
-         
-        io.emit("characters", characters )
-        socket.emit("Hello");
-    
-        socket.on("disconnect", () => {
-            console.log("user disconnected")
-              characters.splice(characters.findIndex(character => character.id === socket.id),1);
-              io.emit("characters", characters )
-        })
-        server.all('*', (req, res) => {
-            return handle(req, res);
-        });
-    
-        const PORT = process.env.PORT || 3001;
-        httpServer.listen(PORT, () => {
-            console.log(`Server is running on http://localhost:${PORT}`);
-        });
-      
-    })
-
+    },
 })
+console.log("Starting the server");
 
 const characters = []; 
 
@@ -54,3 +19,23 @@ function generateRandomHexColor(){
 };
 
 
+io.on("connection",(socket)=> {
+    console.log("user connected");
+    characters.push({
+        id:socket.id,
+        position:generateRandomPosition(),
+        main_color:generateRandomHexColor(),
+        lining_color:generateRandomHexColor()
+    })
+     
+    io.emit("characters", characters )
+    socket.emit("Hello");
+
+    socket.on("disconnect", () => {
+        console.log("user disconnected")
+          characters.splice(characters.findIndex(character => character.id === socket.id),1);
+          io.emit("characters", characters )
+    })
+
+  
+})
